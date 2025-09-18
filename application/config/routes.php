@@ -53,3 +53,11 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['admin/index']= 'admin';
+$route['category/(:num)/(:num)/(:any)/(:num)'] = 'category/index/$1/$2/$3/$4'; // cid/sid/sort/limit
+$route['category/(:num)/(:num)/(:num)/(:any)'] = 'category/index/$1/$2/$3/$4'; // cid/sid/limit/sort
+$route['category/(:num)/(:num)/(:num)'] = 'category/index/$1/$2/$3';           // cid/sid/limit
+$route['category/(:num)/(:num)/(:any)'] = 'category/index/$1/$2/$3';           // cid/sid/sort
+$route['category/(:num)/(:num)'] = 'category/index/$1/$2';                     // cid/sid
+$route['category/(:num)'] = 'category/index/$1';                               // cid only
+
+

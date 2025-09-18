@@ -176,6 +176,7 @@ class Admin extends CI_Controller
 		if (!$this->session->userdata('auth_user')) {
 			redirect(base_url('admin/index'));
 		}
+		$data['discount'] = ['name' => '', 'valid_form' => '', 'valid_till' => '', 'amount' => '','type'=>'','status'=>''];
 		$data['pageTitle'] = 'Add Discount';
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/add_discount', $data);
@@ -198,6 +199,7 @@ class Admin extends CI_Controller
 		if (!$this->session->userdata('auth_user')) {
 			redirect(base_url('admin/index'));
 		}
+		$data['pageTitle'] = 'Add Product';
 		$data['category_table'] = $this->db->select('category.id,category.category_name')->from('category')->get()->result_array();
 		$data['sub_category_table'] = $this->db->select('`id`, `name`')->from('`sub_category`')->get()->result_array();
 
@@ -231,13 +233,113 @@ class Admin extends CI_Controller
 
 	public function edit_product($id)
 	{
+		$data['pageTitle'] = 'Edit Product';
 		if (!$this->session->userdata('auth_user')) {
 			redirect(base_url('admin/index'));
 		}
+	}
+	public function edit_discount($id=''){
+		if(empty($id))redirect(base_url('admin/discount'));
+		$data['pageTitle'] = 'Edit Discount';
+		$data['discount_id']=$id;
+		$data['discount'] = $this->db->select()->from('discount')->where('id',$id)->get()->result_array();
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/add_discount', $data);
+		$this->load->view('admin/footer');
+
+
 		
 	}
 
 	// All submit Pages...
+	public function submit_category()
+	{
+		date_default_timezone_set('Asia/Kolkata');
+		// Upload configuration
+		$config['upload_path']   = FCPATH . 'uploads/category_images/';
+		$config['allowed_types'] = 'jpg|jpeg|png';
+		$config['max_size']      = 1024; // 2MB
+		$config['encrypt_name']  = TRUE; // Generates a unique filename
+
+		// Load upload library
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('image')) {
+			// Upload failed
+			$error = $this->upload->display_errors();
+			$this->session->set_flashdata('flash', ['type' => 'error', 'message' => $error]);
+			redirect('admin/add_category');
+		} else {
+			// Upload success
+			$uploadData = $this->upload->data();
+			$uploadData = $uploadData['file_name'];
+			$data = [
+				'category_name' => $this->input->post('category_name'),
+				'image'         => $uploadData,
+				'order'         => $this->input->post('order') ?? '0',
+				'status'        => $this->input->post('status'),
+				'created_at'    => date('Y-m-d H:i:s')
+
+			];
+			$this->Category_model->insert_category($data);
+			$this->session->set_flashdata('flash', ['type' => 'success', 'message' => 'Category added successfully!']);
+			redirect('admin/category');
+		}
+	}
+
+	public function submit_sub_category()
+	{
+		date_default_timezone_set('Asia/Kolkata');
+		$this->load->model('Sub_category_model');
+		$data = [
+			'name' => $this->input->post('sub_category_name'),
+			'category_id' => $this->input->post('category'),
+			'order' => $this->input->post('order') ?? '0',
+			'status' => $this->input->post('status'),
+			'created_at' => date('Y-m-d H:i:s')
+		];
+		$this->Sub_category_model->insert_subcategory($data);
+		$this->session->set_flashdata('flash', ['type' => 'success', 'message' => 'Sub Category added successfully!']);
+		redirect('admin/sub_category');
+	}
+
+	public function submit_product()
+	{
+		$data = $this->input->post();
+		var_dump($data);
+	}
+
+	public function submit_discount()
+	{
+		$data=[
+			'name'=>$this->input->post('discount-name',TRUE) ?? '',
+			'valid_form'=> $this->input->post('valid-form',TRUE) ?? '',
+			'valid_till'=>$this->input->post('valid-to',TRUE) ?? '',
+			'type'=>$this->input->post('type',TRUE) ?? '',
+			'amount'=>$this->input->post('amount',TRUE) ?? '',			
+			'status'=>$this->input->post('status',TRUE) ?? '',
+			'deleted'=>'No',
+			'created_at'=> date('Y-m-d H:i:s'),
+		];
+		$this->load->model('Discount_model');
+		$this->Discount_model->insert_discount($data);
+		$this->session->set_flashdata('flash', ['type' => 'success', 'message' => 'Discount added successfully!']);
+		redirect('admin/discount');
+		
+	}
+
+
+
+
+	public function subcategory_for_product($id)
+	{
+		header('Content-Type: application/json');
+		$this->load->model('Sub_category_model');
+		$data = $this->Sub_category_model->get_category_under_subcategory($id);
+		echo json_encode($data);
+	}
+
+
 
 
 
@@ -303,4 +405,3 @@ class Admin extends CI_Controller
 		exit;
 	}
 }
-

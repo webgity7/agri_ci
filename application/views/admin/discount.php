@@ -70,7 +70,7 @@ var flashMessage = "<?= $flash['message'] ?>";
                                             <td><?= $row['status'] ?></td>
                                             <td>
                                                 <div class="d-flex justify-content-center gap-3">
-                                                    <a href="<?= base_url('edit_discount?id=' . $row['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
+                                                    <a href="<?= base_url('admin/edit_discount/' . $row['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
                                                     <a href="<?= base_url('delete?did=' . $row['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
                                                 </div>
                                             </td>

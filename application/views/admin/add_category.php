@@ -35,7 +35,7 @@
                     </div>
                     <!--end::Header-->
                     <!--begin::Form-->
-                    <form id="addCategory" action="submit_category.php" method="post" enctype="multipart/form-data">
+                    <form id="addCategory" action="<?= base_url('admin/submit_category') ?>" method="post" enctype="multipart/form-data" >
                         <!-- <input type="hidden" name="page_id" value=""> -->
 
                         <!--begin::Body-->
@@ -47,7 +47,7 @@
 
                                     </td>
                                     <td style="padding:10px; vertical-align:top;">
-                                        <input type="text" class="form-control" id="category_name" placeholder="Category name" name="category_name" value="<?= $category['category_name']?>" required>
+                                        <input type="text" class="form-control" id="category_name" placeholder="Category name" name="category_name" value="<?= $category['category_name'] ?>" require >
                                     </td>
                                 </tr>
                                 <tr>
@@ -56,7 +56,7 @@
 
                                     </td>
                                     <td style="padding:10px; vertical-align:top;">
-                                        <input type="number" class="form-control" id="order_number" name="order_number" value="<?= $category['order']?>">
+                                        <input type="number" class="form-control" id="order_number" name="order_number" value="<?= $category['order'] ?>">
                                     </td>
                                 </tr>
 
@@ -65,9 +65,9 @@
                                         <label for="image" class="form-label mb-0">Image <span style="color:red;font-size:20px;">*</span></label>
                                     </td>
                                     <td style="padding:10px;">
-                                          <div class="image_item_parent mb-2  gap-2 ">
-                                        <div class="image_item"><img src="<?=base_url('uploads/category_images/').$category['image'] ?>" alt=""></div>
-                                    </div>
+                                        <div class="image_item_parent mb-2  gap-2 ">
+                                            <div class="image_item"><img src="<?= base_url('uploads/category_images/') . $category['image'] ?>" alt=""></div>
+                                        </div>
                                         <div><small id="error_msg" class="text-danger">Image width and height should be 70 x70 pixel</small></div>
                                         <input type="file" class="form-control" id="image" name="image" accept=".png, .jpg, .jpeg">
                                     </td>
@@ -132,7 +132,16 @@
 
         const ext = file.name.split(".").pop().toLowerCase();
         if (!allowedExtensions.includes(ext)) {
-            alert("Invalid file type. Allowed: " + allowedExtensions.join(", "));
+            Swal.fire({
+                icon: 'error',
+                title: "Invalid file type. Allowed: " + allowedExtensions.join(", "),
+                showConfirmButton: true,
+                timer: 3000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
             imageInput.value = ""; // clear
             imageInput.classList.add("error-border");
         }
@@ -142,9 +151,20 @@
     form.addEventListener("submit", (e) => {
         e.preventDefault(); // stop submission until validated
 
+        
+
         const file = imageInput.files[0];
         if (!file) {
-            alert("Please select an image.");
+            Swal.fire({
+                icon: 'error',
+                text: "Please select an image.",
+                showConfirmButton: true,
+                timer: 3000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
             imageInput.classList.add("error-border");
             return;
         }
@@ -154,13 +174,21 @@
 
         img.onload = function() {
             if (img.width == 70 && img.height == 70) {
-
-                alert(" Image is valid. Form submitted!");
-                form.submit(); // now submit
+                form.submit();
             } else {
-                alert("Image must be  70x70 pixels.");
+                Swal.fire({
+                    icon: 'error',
+                    text: "Image must be  70x70 pixels.",
+                    showConfirmButton: true,
+                    timer: 3000,
+                    width: 300,
+                    height: 150,
+                    imageWidth: 10,
+                    imageHeight: 10
+                });
                 imageInput.classList.add("error-border");
             }
         };
     });
+
 </script>

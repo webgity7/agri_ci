@@ -6,13 +6,13 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Add Discount Coupon</h3>
+                    <h3 class="mb-0"><?php echo isset($discount_id) ? 'Edit Discount' : 'Add Discount'; ?> Coupon</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="discount.php">Discount</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Discount Coupon</li>
+                        <li class="breadcrumb-item"><a href="admin/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="admin/discount">Discount</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo isset($discount_id) ? 'Edit Discount' : 'Add Discount'; ?> Coupon</li>
                     </ol>
                 </div>
             </div>
@@ -35,15 +35,22 @@
                     </div>
                     <!--end::Header-->
                     <!--begin::Form-->
-                    <form id="addDiscount" action="submit_discount.php" method="post" enctype="multipart/form-data">
+                    <form id="addDiscount" action="<?php echo isset($discount_id) ? 'submit_edit_discount' : 'submit_discount' ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="discount_id" value="">
                         <!--begin::Body-->
                         <div class="card-body">
                             <table style="width:100%; border-collapse:collapse;">
                                 <tr>
                                     <td style="padding:10px; vertical-align:top;">
-                                        <label for="category" class="form-label">Name<span style="color:red;font-size:20px;">*</span></label>
-                                        <input type="text" class="form-control" id="image_nickname" placeholder="Discount Coupon Name" name="discount-name" value="">
+                                        <label for="discount-name" class="form-label">Name<span style="color:red;font-size:20px;">*</span></label>
+                                        
+                                        <?php  $discount_name = isset($discount[0]['name']) ? $discount[0]['name'] : ''; ?>
+                                        <input type="text" class="form-control" id="discount-name"
+                                            placeholder="Discount Coupon Name"
+                                            name="discount-name"
+                                            <?= $discount_name != '' ? "value='$discount_name'" : '' ?>
+                                            required>
+
 
                                     </td>
                                     <td style="padding:10px; vertical-align:top;">
@@ -66,8 +73,8 @@
                                     </td>
                                     <td style="padding:10px; vertical-align:top;">
                                         <div class="form-group">
-                                            <label for="status" class="form-label">Type <span style="color:red;font-size:20px;">*</span></label>
-                                            <select class="form-select" style="cursor:pointer;" id="status" name="type">
+                                            <label for="type" class="form-label">Type <span style="color:red;font-size:20px;">*</span></label>
+                                            <select class="form-select" style="cursor:pointer;" id="type" name="type">
                                                 <option value="Percentage" selected>Percentage</option>
                                                 <option value="Dolar">Dolar</option>
                                             </select>

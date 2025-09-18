@@ -35,7 +35,7 @@
                     </div>
                     <!--end::Header-->
                     <!--begin::Form-->
-                    <form id="image_form" action="submit_sub_category.php" method="post" enctype="multipart/form-data">
+                    <form id="image_form" action="<?= base_url('admin/submit_sub_category') ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="page_id">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -56,8 +56,8 @@
                                         </select>
                                     </td>
                                     <td style="padding:10px; vertical-align:top;">
-                                        <label for="image_nickname" class="form-label">Name <span style="color:red;font-size:20px;">*</span></label>
-                                        <input type="text" class="form-control" id="image_nickname" placeholder="Sub Category Name" name="sub_category_name" required>
+                                        <label for="sub_category_name" class="form-label">Name <span style="color:red;font-size:20px;">*</span></label>
+                                        <input type="text" class="form-control" id="sub_category_name" placeholder="Sub Category Name" name="sub_category_name" required>
                                     </td>
                                 </tr>
 

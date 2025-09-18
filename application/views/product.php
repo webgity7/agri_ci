@@ -60,7 +60,7 @@
                 <button type="submit" class="btn btn-default btn-lg">Add to Cart</button>
               </form> -->
               <div class="form-group clearfix">
-                <form action="<?= base_url('add_to_cart')?>" method="get" id="addToCart" style="display: flex; gap: 10px; align-items: center;">
+                <form action="<?= base_url('add_to_cart') ?>" method="get" id="addToCart" style="display: flex; gap: 10px; align-items: center;">
                   <label for="input-quantity" class="control-label">Qty</label>
                   <input type="number" class="form-control" id="input-quantity" value="1" name="quantity" vk_106cf="subscribed" style="width: 200px;">
                   <input type="hidden" name="product_id" id="product_id" value="<?= $product['id'] ?>">
@@ -304,6 +304,7 @@
         title: flashMessage,
         showConfirmButton: true,
         timer: 1000
+        
       });
     }
   });

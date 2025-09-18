@@ -48,9 +48,9 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
                                     <td style="padding:10px;">
                                         <label for="category" class="form-label">Category <span style="color:red;font-size:20px;">*</span></label>
                                         <select class="form-select" id="category" name="category">
-                                            <option value="">--Select Sub Category--</option>
+                                            <option value="">--Select Category--</option>
                                             <?php
-                                            foreach ($category_table as $item=>$key): ?>
+                                            foreach ($category_table as $item => $key): ?>
 
                                                 <?php
                                                 echo "<option value=\"{$key['id']}\">{$key['category_name']}</option>"; ?>
@@ -58,11 +58,11 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
                                         </select>
                                     </td>
                                     <td style="padding:10px;">
-                                        <label for="subcategory" class="form-label">Sub Category</label>
+                                        <label for="subcategory" class="form-label">Sub Category <span style="color:#fff;font-size:20px;">*</span></label>
                                         <select class="form-select" id="subcategory" name="subcategory">
                                             <option value="">--Select Sub Category--</option>
                                             <?php
-                                            foreach ($sub_category_table as $item=>$key): ?>
+                                            foreach ($sub_category_table as $item => $key): ?>
 
                                                 <?php
                                                 echo "<option value=\"{$key['id']}\">{$key['name']}</option>"; ?>
@@ -283,7 +283,17 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
 
         if (!raw.length) {
             galleryImage.value = "";
-            return alert("Invalid file type. Allowed: " + allowedExtensions.join(", "));
+            return Swal.fire({
+                icon: 'error',
+                text: "Invalid file type. Allowed: " + allowedExtensions.join(", "),
+                showConfirmButton: true,
+                timer: 5000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
+
         };
 
         let skipped = 0;
@@ -298,10 +308,28 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
 
         if (!files.length) {
             galleryImage.value = "";
-            return alert(`No valid images. Must be ≥1000px wide and ≤${maxSizeMB}MB.`);
+            return Swal.fire({
+                icon: 'error',
+                text: `No valid images. Must be ≥1000px wide and ≤${maxSizeMB}MB.`,
+                showConfirmButton: true,
+                timer: 5000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
         }
 
-        if (skipped) alert(`Skipped ${skipped} image(s) (invalid size or width).`);
+        if (skipped)  Swal.fire({
+                icon: 'error',
+                text: `Skipped ${skipped} image(s) (invalid size or width).`,
+                showConfirmButton: true,
+                timer: 5000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
 
         render();
         updateFiles();
@@ -330,7 +358,16 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
         // Validate extension
         const ext = file.name.split(".").pop().toLowerCase();
         if (!allowedExtensions.includes(ext)) {
-            alert("Invalid file type. Allowed: " + allowedExtensions.join(", "));
+            Swal.fire({
+                icon: 'error',
+                text: "Invalid file type. Allowed: " + allowedExtensions.join(", "),
+                showConfirmButton: true,
+                timer: 5000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
             imageInput.classList.add("border-danger");
             imageInput.value = "";
             return;
@@ -339,7 +376,16 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
         // Validate file size
         const sizeMB = file.size / (1024 * 1024);
         if (sizeMB > maxSizeMB) {
-            alert("File size must be less than " + maxSizeMB + " MB.");
+            Swal.fire({
+                icon: 'error',
+                text: "File size must be less than " + maxSizeMB + " MB.",
+                showConfirmButton: true,
+                timer: 5000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
             imageInput.classList.add("border-danger");
             imageInput.value = "";
             return;
@@ -349,7 +395,16 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
         const img = new Image();
         img.onload = function() {
             if (img.width < 1000) {
-                alert("Image width must be at least 1000 pixels.");
+                Swal.fire({
+                    icon: 'error',
+                    text: "Image width must be at least 1000 pixels.",
+                    showConfirmButton: true,
+                    timer: 5000,
+                    width: 300,
+                    height: 150,
+                    imageWidth: 10,
+                    imageHeight: 10
+                });
                 imageInput.classList.add("border-danger");
                 imageInput.value = "";
             } else {
@@ -358,7 +413,16 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
             }
         };
         img.onerror = function() {
-            alert("Failed to load image for dimension check.");
+            Swal.fire({
+                icon: 'error',
+                text: "Failed to load image for dimension check.",
+                showConfirmButton: true,
+                timer: 5000,
+                width: 300,
+                height: 150,
+                imageWidth: 10,
+                imageHeight: 10
+            });
             imageInput.classList.add("border-danger");
             imageInput.value = "";
         };
@@ -372,11 +436,12 @@ $sql = "SELECT `id`, `name` FROM `sub_category`;";
     document.getElementById('category').addEventListener('change', function() {
         const categoryId = this.value;
 
-        fetch(`helper.php?cid=${encodeURIComponent(categoryId)}`)
+        fetch(`subcategory_for_product/${encodeURIComponent(categoryId)}`)
             .then(response => response.text())
             .then(text => {
                 try {
                     const data = JSON.parse(text);
+                    console.log(data);
                     const subcategorySelect = document.getElementById('subcategory');
                     subcategorySelect.innerHTML = '<option value="0">--Select Subcategory--</option>';
 

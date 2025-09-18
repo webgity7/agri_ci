@@ -68,4 +68,10 @@ class Category_model extends CI_Model
             return null;
         }
     }
+
+     public function insert_category($data) {
+        return $this->db->insert('category', $data); // 'category' is your table name
+
+        
+    }
 }

@@ -11,4 +11,15 @@ class Sub_category_model extends CI_Model
         }
         return $this->db->get()->result_array();
     }
+
+    public function insert_subcategory($data)
+    {
+        return $this->db->insert('sub_category', $data);
+    }
+
+    public function get_category_under_subcategory($data){
+        $data=$this->db->select()->from('sub_category')->where('category_id',$data)->get()->result_array();
+        return $data;
+
+    }
 }

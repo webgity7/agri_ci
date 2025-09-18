@@ -11,4 +11,8 @@ class Discount_model extends CI_Model
         }
         return $this->db->get()->result_array();
     }
+    public function insert_discount($data)
+    {
+        $this->db->insert('discount', $data);
+    }
 }

@@ -60,7 +60,7 @@
 
                     <!-- Search -->
                     <div class="input-group" id="search">
-                        <form method="GET" action="<?= base_url('products') ?>">
+                        <form method="POST" action="<?= base_url('products') ?>">
                             <div>
                                 <input class="form-control input-lg" name="name" placeholder="Search" value="<?= htmlspecialchars($search ?? '', ENT_QUOTES) ?>">
                                 <span class="input-group-btn">
@@ -135,11 +135,11 @@
                     <li><a href="<?= base_url() ?>">Home</a></li>
                     <?php foreach ($categories as $cat): ?>
                         <li>
-                            <a href="<?= base_url('category?cid=' . $cat['id']) ?>"><?= $cat['category_name'] ?></a>
+                            <a href="<?= base_url('category/' . $cat['id']) ?>"><?= $cat['category_name'] ?></a>
                             <?php if (!empty($cat['subcategories'])): ?>
                                 <ul>
                                     <?php foreach ($cat['subcategories'] as $sub): ?>
-                                        <li><a href="<?= base_url('category?cid=' . $cat['id'] . '&sid=' . $sub['id']) ?>"><?= $sub['name'] ?></a></li>
+                                        <li><a href="<?= base_url('category/' . $cat['id'] . '/' . $sub['id']) ?>"><?= $sub['name'] ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             <?php endif; ?>
