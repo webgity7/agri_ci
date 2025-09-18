@@ -1,0 +1,101 @@
+.light-weight {
+    font-weight: lighter !important;
+}
+
+.bolder-weight {
+    font-weight: bolder !important;
+}
+
+.sidebar-menu .nav-item>.nav-link {
+    border-left: 4px solid #343a40 !important;
+}
+
+.sidebar-menu>.nav-item>.nav-link:hover {
+    border-left: 4px solid #80c908 !important;
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+option {
+    cursor: pointer !important;
+}
+
+.image-preview-section {
+    position: relative;
+}
+
+.image-preview {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: -170px;
+    /* left: 180px; */
+    /* display: none; */
+    border: 1px solid red;
+
+}
+
+/***********Dash Card Design *************/
+.dash-icon {
+    position: absolute;
+    left: 180px;
+    top: 20px;
+    color: #ccc;
+}
+
+.dash-icon i {
+    color: #f0f1ef;
+    transition: 0.3s ease-in-out;
+}
+
+.dash-icon i:hover {
+    transform: scale(1.23);
+}
+
+.nav-item .nav-link {
+    border-left: 4px !important;
+}
+
+.image_item {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 150px;
+    /* background-color: pink; */
+    border-radius: 4px;
+    display: flex;
+    justify-content:start;
+    align-items: center;
+    /* overflow-x: scroll; */
+    position: relative !important;
+}
+.image_item img{
+    border-radius: 6px;
+    cursor: pointer;
+    /* border: 1px solid #333; */
+    background-color: pink;
+    
+
+}
+
+.swal-custom-size {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.swal2-toast{
+    padding: 6px !important;
+}
+/* .cross{
+    color:white;
+    width: 20px;
+    height:20px;
+    font-weight: 45px;
+    font-family: Tahoma;
+    position: absolute;
+    right:-7;
+    top:-2;
+    font-weight: bolder;
+    cursor: pointer;
+} */
