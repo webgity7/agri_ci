@@ -101,7 +101,7 @@
             try {
                 console.log(username);
                 console.log(password);
-                const response = await fetch('verify', {
+                const response = await fetch('admin/verify', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

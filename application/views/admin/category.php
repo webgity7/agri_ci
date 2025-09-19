@@ -28,7 +28,7 @@ var flashMessage = "<?= $flash['message'] ?>";
                     <div class="card-header d-flex justify-content-between">
                         <a href="<?= base_url('admin/category') ?>" class="btn btn-sm bg-success text-white">All</a>
                         <?php for ($i = 65; $i <= 90; $i++): ?>
-                            <a href="<?= base_url('admin/category' . chr($i)) ?>" class="btn btn-sm bg-success text-white"><?= chr($i) ?></a>
+                            <a href="<?= base_url('admin/category?query=' . chr($i)) ?>" class="btn btn-sm bg-success text-white"><?= chr($i) ?></a>
                         <?php endfor; ?>
                     </div>
 
@@ -42,7 +42,7 @@ var flashMessage = "<?= $flash['message'] ?>";
 
                     <div class="card-body card-info card-outline rounded-0">
                         <div class="d-flex justify-content-end">
-                            <a href="<?= base_url('admin/add_category') ?>" class="btn btn-success mb-2">Add New</a>
+                            <a href="<?= base_url('admin/category/add') ?>" class="btn btn-success mb-2">Add New</a>
                         </div>
 
                         <table class="table table-hover text-center">
@@ -64,8 +64,8 @@ var flashMessage = "<?= $flash['message'] ?>";
                                             <td><?= $item['status'] ?></td>
                                             <td><?= $item['sub_category_count'] ?></td>
                                             <td>
-                                                <a href="<?= base_url('admin/edit_category/' . $item['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
-                                                <a href="<?= base_url('delete?cid=' . $item['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
+                                                <a href="<?= base_url('admin/category/edit/' . $item['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
+                                                <a href="<?= base_url('admin/category/delete/' . $item['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

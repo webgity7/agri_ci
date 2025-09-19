@@ -25,14 +25,14 @@ var flashMessage = "<?= $flash['message'] ?>";
             <div class="row">
                 <div class="card card-info card-outline p-0 rounded-0">
                     <div class="card-header d-flex justify-content-between">
-                        <a href="<?= base_url('sub_category') ?>" class="btn btn-sm bg-success text-white">All</a>
+                        <a href="<?= base_url('admin/subcategory') ?>" class="btn btn-sm bg-success text-white">All</a>
                         <?php for ($i = 65; $i <= 90; $i++): ?>
-                            <a href="<?= base_url('sub_category/' . chr($i)) ?>" class="btn btn-sm bg-success text-white"><?= chr($i) ?></a>
+                            <a href="<?= base_url('admin/subcategory?query=' . chr($i)) ?>" class="btn btn-sm bg-success text-white"><?= chr($i) ?></a>
                         <?php endfor; ?>
                     </div>
 
                     <div class="card-header card-header border-4 border-bottom border-info">
-                        <form class="d-flex gap-4" method="get" action="<?= base_url('sub_category') ?>">
+                        <form class="d-flex gap-4" method="get" action="<?= base_url('admin/subcategory') ?>">
                             <div class="d-inline-flex align-items-center text-nowrap" style="font-weight:bold;">Sub Category Name</div>
                             <input class="form-control me-2" type="search" name="query" placeholder="Search">
                             <button class="btn btn-sm btn-success" type="submit">Search</button>
@@ -41,7 +41,7 @@ var flashMessage = "<?= $flash['message'] ?>";
 
                     <div class="card-body card-info card-outline rounded-0">
                         <div class="d-flex justify-content-end">
-                            <a href="<?= base_url('admin/add_sub_category') ?>" class="btn btn-success mb-2">Add New</a>
+                            <a href="<?= base_url('admin/subcategory/add') ?>" class="btn btn-success mb-2">Add New</a>
                         </div>
 
                         <table class="table table-hover text-center">
@@ -63,8 +63,8 @@ var flashMessage = "<?= $flash['message'] ?>";
                                             <td><?= $item['category_name'] ?></td>
                                             <td><?= $item['status'] ?></td>
                                             <td>
-                                                <a href="<?= base_url('admin/edit_sub_category/' . $item['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
-                                                <a href="<?= base_url('delete?sid=' . $item['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
+                                                <a href="<?= base_url('admin/subcategory/edit/' . $item['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
+                                                <a href="<?= base_url('admin/subcategory/delete/' . $item['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

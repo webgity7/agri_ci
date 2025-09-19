@@ -26,10 +26,9 @@ var flashMessage = "<?= $flash['message'] ?>";
             <div class="row">
                 <div class="card card-info card-outline p-0 rounded-0">
                     <div class="card-header d-flex justify-content-between">
-                        <a href="<?= base_url('admin/
-                        product') ?>" class="btn btn-sm bg-success text-white">All</a>
+                        <a href="<?= base_url('admin/product') ?>" class="btn btn-sm bg-success text-white">All</a>
                         <?php for ($i = 65; $i <= 90; $i++): ?>
-                            <a href="<?= base_url('product?query=' . chr($i)) ?>" class="btn btn-sm bg-success text-white"><?= chr($i) ?></a>
+                            <a href="<?= base_url('admin/product?query=' . chr($i)) ?>" class="btn btn-sm bg-success text-white"><?= chr($i) ?></a>
                         <?php endfor; ?>
                     </div>
 
@@ -43,7 +42,7 @@ var flashMessage = "<?= $flash['message'] ?>";
 
                     <div class="card-body card-info card-outline rounded-0">
                         <div class="d-flex justify-content-end">
-                            <a href="<?= base_url('admin/add_product') ?>" class="btn btn-success mb-2">Add New</a>
+                            <a href="<?= base_url('admin/product/add') ?>" class="btn btn-success mb-2">Add New</a>
                         </div>
 
                         <table class="table table-hover text-center">
@@ -67,8 +66,8 @@ var flashMessage = "<?= $flash['message'] ?>";
                                             <td><?= $item['price'] ?></td>
                                             <td><?= $item['availability'] ?></td>
                                             <td>
-                                                <a href="<?= base_url('edit_product?id=' . $item['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
-                                                <a href="<?= base_url('delete?pid=' . $item['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
+                                                <a href="<?= base_url('admin/product/edit/' . $item['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
+                                                <a href="<?= base_url('admin/product/delete/' . $item['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -83,7 +83,7 @@ class Product_model extends CI_Model
     }
 
     // For Product.php
-    
+
 
     public function get_product_images($pid)
     {
@@ -97,7 +97,7 @@ class Product_model extends CI_Model
 
     public function get_related_products()
     {
-        $product_id=$this->input->get('pid');
+        $product_id = $this->input->get('pid');
         $this->db->select('`id`, `name`, `price`, `description`, `category_id`, `sub_category_id`, `availability`, `featured_image`');
         $this->db->from('product');
         $this->db->where('deleted !=', 'Yes');
@@ -115,22 +115,67 @@ class Product_model extends CI_Model
         $this->db->where('category_id', $category_id);
         $this->db->where('id !=', $product_id);
         $this->db->where('deleted !=', 'Yes');
-        $this->db->limit($limit=10);
+        $this->db->limit($limit = 10);
         $query = $this->db->get();
         return $query->result_array();
     }
 
- public function get_product_by_id($id) {
-    $this->db->select('p.id, p.name AS product_name, p.price, p.description, p.availability, p.featured_image, 
-                       p.featured_product, p.special_product, p.created_at, p.updated_at, 
-                       c.category_name, sc.name AS sub_category_name');
-    $this->db->from('product p');
-    $this->db->join('category c', 'p.category_id = c.id', 'inner');
-    $this->db->join('sub_category sc', 'p.sub_category_id = sc.id', 'left');
-    $this->db->where('p.id', $id);
-    $this->db->where('p.deleted !=', 'Yes');
-    $query = $this->db->get();
-    return $query->row_array(); // returns null if not found
-}
 
+
+    public function insert_product($data)
+    {
+        $this->db->insert('product', $data);
+        return $this->db->insert_id();
+    }
+
+    public function insert_image($filename, $product_id)
+    {
+        $this->db->insert('images', [
+            'image_src' => $filename,
+            'product_id' => $product_id
+        ]);
+    }
+
+
+
+
+
+    public function get_product_details($id)
+    {
+        $this->db->select('p.id, p.name AS product_name, p.price, p.description, c.category_name, sc.name AS sub_category_name, p.availability, p.featured_image, p.featured_product, p.special_product, c.id as category_id');
+        $this->db->from('product p');
+        $this->db->join('category c', 'p.category_id = c.id', 'inner');
+        $this->db->join('sub_category sc', 'p.sub_category_id = sc.id', 'left');
+        $this->db->where('p.id', $id);
+        return $this->db->get()->row_array();
+    }
+
+
+    public function get_product_by_id($id)
+    {
+        $this->db->select('p.id, p.name AS product_name, p.price, p.description, c.category_name, sc.name AS sub_category_name, p.availability, p.featured_image, p.featured_product, p.special_product, c.id as category_id');
+        $this->db->from('product p');
+        $this->db->join('category c', 'p.category_id = c.id', 'inner');
+        $this->db->join('sub_category sc', 'p.sub_category_id = sc.id', 'left');
+        $this->db->where('p.id', $id);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_all_categories()
+    {
+        return $this->db->select('id, category_name')->get('category')->result_array();
+    }
+
+    public function get_subcategories_by_category($category_id)
+    {
+        return $this->db->get_where('sub_category', ['category_id' => $category_id])->result_array();
+    }
+
+    public function get_gallery_images($product_id)
+    {
+        $this->db->select('id, image_src AS images');
+        $this->db->from('images');
+        $this->db->where('product_id', $product_id);
+        return $this->db->get()->result_array();
+    }
 }

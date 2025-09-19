@@ -53,11 +53,48 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['admin/index']= 'admin';
-$route['category/(:num)/(:num)/(:any)/(:num)'] = 'category/index/$1/$2/$3/$4'; // cid/sid/sort/limit
-$route['category/(:num)/(:num)/(:num)/(:any)'] = 'category/index/$1/$2/$3/$4'; // cid/sid/limit/sort
-$route['category/(:num)/(:num)/(:num)'] = 'category/index/$1/$2/$3';           // cid/sid/limit
-$route['category/(:num)/(:num)/(:any)'] = 'category/index/$1/$2/$3';           // cid/sid/sort
-$route['category/(:num)/(:num)'] = 'category/index/$1/$2';                     // cid/sid
-$route['category/(:num)'] = 'category/index/$1';                               // cid only
+
+// for admin/category
+$route['admin/category'] = 'admincategory/index';
+$route['admin/category/add'] = 'admincategory/add_category';
+$route['admin/category/edit/(:num)'] = 'admincategory/edit_category/$1';
+$route['admin/category/submit'] = 'admincategory/submit_category';
+$route['admin/category/update'] = 'admincategory/update_category';
+$route['admin/category/delete/(:num)'] = 'admincategory/delete_category/$1';
+
+// for admin/subcategory
+$route['admin/subcategory'] = 'adminsubcategory/index';
+$route['admin/subcategory/add'] = 'adminsubcategory/add_subcategory';
+$route['admin/subcategory/submit'] = 'adminsubcategory/submit_subcategory';
+$route['admin/subcategory/edit/(:num)'] = 'adminsubcategory/edit_subcategory/$1';
+$route['admin/subcategory/update'] = 'adminsubcategory/update_subcategory/';
+$route['admin/subcategory/delete/(:num)'] = 'adminsubcategory/delete_subcategory/$1';
+
+// for admin/product 
+$route['admin/product'] = 'adminproduct/index';
+$route['admin/product/add'] = 'adminproduct/add_product';
+$route['admin/product/submit'] = 'adminproduct/submit_product';
+$route['admin/product/edit/(:num)'] = 'adminproduct/edit_product/$1';
+$route['admin/product/update'] = 'adminproduct/update_product';
+$route['admin/product/delete/(:num)'] = 'adminproduct/delete_product';
+$route['admin/product/subcategory_for_product/(:num)'] = 'adminproduct/subcategory_for_product/$1';
+
+
+
+// for admin/order 
+$route['admin/order'] = 'adminorder/index';
+
+// for admin/customer
+$route['admin/customer'] = 'admincustomer/index';
+
+// for admin/discount
+$route['admin/discount'] = 'admindiscount/index';
+$route['admin/discount/add'] = 'admindiscount/add_discount';
+$route['admin/discount/edit/(:num)'] = 'admindiscount/edit_discount/$1';
+
+
+
+
+
 
 

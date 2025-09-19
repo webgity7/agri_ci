@@ -41,7 +41,7 @@ var flashMessage = "<?= $flash['message'] ?>";
 
                     <div class="card-body card-info card-outline rounded-0 border-0">
                         <div class="d-flex justify-content-end">
-                            <a href="<?= base_url('admin/add_discount') ?>" class="btn btn-success mb-2">Add New</a>
+                            <a href="<?= base_url('admin/discount/add') ?>" class="btn btn-success mb-2">Add New</a>
                         </div>
 
                         <table class="table table-hover text-center">
@@ -70,7 +70,7 @@ var flashMessage = "<?= $flash['message'] ?>";
                                             <td><?= $row['status'] ?></td>
                                             <td>
                                                 <div class="d-flex justify-content-center gap-3">
-                                                    <a href="<?= base_url('admin/edit_discount/' . $row['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
+                                                    <a href="<?= base_url('admin/discount/edit/' . $row['id']) ?>" class="btn btn-sm bg-info text-white">EDIT</a>
                                                     <a href="<?= base_url('delete?did=' . $row['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
                                                 </div>
                                             </td>

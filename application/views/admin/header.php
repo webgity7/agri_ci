@@ -66,7 +66,7 @@
             <ul class="nav sidebar-menu" data-lte-toggle="treeview" role="navigation" data-accordion="false">
                 <li class="nav-item"><a href="<?= base_url('admin/dashboard') ?>" class="nav-link"><i class="nav-icon bi bi-speedometer text-white"></i><p class="text-white">Dashboard</p></a></li>
                 <li class="nav-item"><a href="<?= base_url('admin/category') ?>" class="nav-link"><i class="nav-icon bi bi-ui-checks-grid text-white"></i><p class="text-white">Category</p></a></li>
-                <li class="nav-item"><a href="<?= base_url('admin/sub_category') ?>" class="nav-link"><i class="nav-icon bi bi-grid-fill text-white"></i><p class="text-white">Sub Category</p></a></li>
+                <li class="nav-item"><a href="<?= base_url('admin/subcategory') ?>" class="nav-link"><i class="nav-icon bi bi-grid-fill text-white"></i><p class="text-white">Sub Category</p></a></li>
                 <li class="nav-item"><a href="<?= base_url('admin/product') ?>" class="nav-link"><i class="nav-icon bi bi-box text-white"></i><p class="text-white">Product</p></a></li>
                 <li class="nav-item"><a href="<?= base_url('admin/order') ?>" class="nav-link"><i class="nav-icon bi bi-cart3 text-white"></i><p class="text-white">Order</p></a></li>
                 <li class="nav-item"><a href="<?= base_url('admin/discount') ?>" class="nav-link"><i class="nav-icon bi bi-percent text-white"></i><p class="text-white">Discount</p></a></li>
