@@ -1,45 +1,3 @@
-<?php
-
-// var_dump($id);
-$sql = "SELECT p.id,
-       p.name AS product_name,
-       p.price,
-       p.description,
-       c.category_name,
-       sc.name AS sub_category_name,
-       p.availability,
-       p.featured_image,
-       p.featured_product,
-       p.special_product,
-       c.id as category_id
-FROM product p
-INNER JOIN category c ON p.category_id = c.id
-LEFT JOIN sub_category sc ON p.sub_category_id = sc.id
-WHERE p.id = $id ";
-
-
-$sql = "SELECT `id`, `category_name` FROM `category`";
-// $category_data = execute_query($sql);
-
-
-$sql = "SELECT `id`, `name` FROM `sub_category`";
-// $sub_category_data = execute_query($sql);
-
-
-$sql = "SELECT p.name AS product_name,
-        p.id,
-        i.id,
-        GROUP_CONCAT(i.image_src ORDER BY i.id SEPARATOR ', ') AS images
-        FROM images i
-        INNER JOIN product p ON i.product_id = p.id
-        WHERE p.id = $id
-        GROUP BY p.id, p.name, i.id
-";
-
-// $images_data = execute_query($sql);
-
-
-?>
 <main class="app-main" id="main" tabindex="-1">
     <!--begin::App Content Header-->
     <div class="app-content-header">
@@ -77,8 +35,8 @@ $sql = "SELECT p.name AS product_name,
                     </div>
                     <!--end::Header-->
                     <!--begin::Form-->
-                    <form id="image_form" action="submit_edit_product.php" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="product_id" value="<?php $product['id'] ?>">
+                    <form id="image_form" action="<?= base_url('admin/product/update') ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="product_id" value="<?php echo $product['id'] ?>">
                         <input type="hidden" id="removed_ids" value="" name="removed_images">
 
                         <!--begin::Body-->
@@ -87,7 +45,8 @@ $sql = "SELECT p.name AS product_name,
                                 <tr>
                                     <td style="padding:10px;">
                                         <label for="category" class="form-label">Category <span style="color:red;font-size:20px;">*</span></label>
-                                        <?php  //var_dump($subcategory);?>
+                                        <?php  //var_dump($subcategory);
+                                        ?>
                                         <select class="form-select" id="category" name="category">
                                             <?php
                                             foreach ($category as $option_value => $key) {
@@ -156,7 +115,7 @@ $sql = "SELECT p.name AS product_name,
                                         <div id="preview">
                                             <?php foreach ($gallery_images as $value => $key): ?>
                                                 <div id='database-image' style="position: relative; display: inline-block;">
-                                                    <img data-id="<?php $gallery_images[$value]['id']; ?>" class="previewImg" src="<?= base_url('uploads/product_thumb/' . $gallery_images[$value]['images']); ?>" value='<?= $gallery_images[$value]['id']; ?>' style="width:120px;height:120px;object-fit:cover;border:1px solid #ccc;border-radius:6px;box-shadow:0 2px 5px rgba(0,0,0,.1);background-color:pink;">
+                                                    <img data-id="<?php echo $gallery_images[$value]['id']; ?>" class="previewImg" src="<?= base_url('uploads/product_thumb/' . $gallery_images[$value]['images']); ?>" value="<?= $gallery_images[$value]['id']; ?>" style="width:120px;height:120px;object-fit:cover;border:1px solid #ccc;border-radius:6px;box-shadow:0 2px 5px rgba(0,0,0,.1);background-color:pink;">
                                                     <button type="button" style="position:absolute;top:-8px;right:-8px;background:red;color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:14px;line-height:20px">×</button>
                                                 </div>
                                             <?php endforeach; ?>
@@ -242,8 +201,6 @@ $sql = "SELECT p.name AS product_name,
     }
 </style>
 
-<?php include('footer.php'); ?>
-
 <script>
     // Variable Part    
     const form = document.getElementById("image_form");
@@ -273,6 +230,7 @@ $sql = "SELECT p.name AS product_name,
 
         }
     });
+
 
 
     // Images Size Getting

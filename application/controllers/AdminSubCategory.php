@@ -81,7 +81,7 @@ class AdminSubCategory extends CI_Controller
             'status' => $status,
             'updated_at' => date('Y-m-d H:i:s')
         ]);
-        $this->session->set_flashdata('flash', ['type' => 'success', 'message' => 'Category updated successfully!']);
+        $this->session->set_flashdata('flash', ['type' => 'success', 'message' => 'Sub Category updated successfully!']);
         redirect('admin/subcategory');
     }
     public function delete_subcategory($id)

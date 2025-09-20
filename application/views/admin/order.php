@@ -57,9 +57,9 @@ var flashMessage = "<?= $flash['message'] ?>";
                                             <td><?= $order['firstname'] ?></td>
                                             <td>
                                                 <div class="d-flex justify-content-center gap-3">
-                                                    <a href="<?= base_url('edit_order?oid=' . $order['id']) ?>" class="btn btn-sm bg-info text-white">VIEW/EDIT</a>
-                                                    <a href="<?= base_url('manage?cancel_order_id=' . $order['id']) ?>" class="btn btn-sm bg-warning text-white">CANCEL</a>
-                                                    <a href="<?= base_url('delete?oid=' . $order['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
+                                                    <a href="<?= base_url('admin/order/edit/' . $order['id']) ?>" class="btn btn-sm bg-info text-white">VIEW/EDIT</a>
+                                                    <a href="<?= base_url('admin/order/cancel/' . $order['id']) ?>" class="btn btn-sm bg-warning text-white">CANCEL</a>
+                                                    <a href="<?= base_url('admin/order/delete/' . $order['id']) ?>" class="btn btn-sm bg-danger text-white">DELETE</a>
                                                 </div>
                                             </td>
                                         </tr>

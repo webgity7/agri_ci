@@ -1,0 +1,258 @@
+-- Adminer 4.8.4 MySQL 9.1.0 dump
+
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+SET NAMES utf8mb4;
+
+CREATE TABLE `address` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `customer_id` int unsigned NOT NULL,
+  `companyaddress` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `addresslineone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `addresslinetwo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `states` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'No',
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `address` (`id`, `customer_id`, `companyaddress`, `addresslineone`, `addresslinetwo`, `city`, `postcode`, `country`, `states`, `type`, `deleted`) VALUES
+(9,	12,	'Rivas and Eaton Associates',	' 800 Clarendon Freeway',	' Tempora velit rerum',	'Alias magnam dolore',	'48',	'Canada',	'',	'billing',	'No'),
+(10,	12,	'Cortez Collins Co',	' 571 First Boulevard',	' Molestiae sed eos te',	'Qui officia aute lib',	'69',	'India',	'',	'billing',	'No'),
+(11,	12,	'Garcia Kennedy Plc',	' 97 North Fabien Freeway',	' Sed ea maiores sapie',	'Nostrum praesentium',	'67',	'Mexico',	'',	'shipping',	'No'),
+(12,	12,	'Sims Mercado Plc',	' 32 North Rocky Hague Avenue',	' Sed excepturi maxime',	'Qui quia corrupti q',	'49',	'United Kingdom',	'',	'shipping',	'No'),
+(13,	14,	'Coleman and Martinez Inc',	'64 Milton Drive',	'Culpa delectus nesc',	'Quis quasi aut nulla',	'731204',	'Germany',	'Hesse',	'default',	'No'),
+(14,	15,	'',	'19 Lake Temple road',	'',	'Kolkata',	'700029',	'United States',	'California',	'default',	'No'),
+(15,	16,	'Mullins Clay Inc',	'82 North Oak Avenue',	'Sapiente ullam quide',	'Ut aliquip cupidatat',	'731204',	'Mexico',	'Jalisco',	'default',	'No'),
+(16,	17,	'Oliver and Martinez LLC',	'79 Clarendon Boulevard',	'Rerum ullam libero r',	'Reprehenderit quis',	'731204',	'Brazil',	'Bahia',	'default',	'No'),
+(17,	18,	'Rodriquez and Wilkins Co',	'786 White Nobel Road',	'Sit repudiandae omn',	'Commodi animi itaqu',	'731204',	'India',	'Tamil Nadu',	'default',	'No');
+
+CREATE TABLE `admin` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `admin` (`id`, `user_name`, `password`, `created_at`, `updated_at`) VALUES
+(1,	'root',	'$2y$10$3GAJqR8ZObavqqYArFzbE.CFhWauFsIUUf5IBeS.6quYBe4M1rvIK',	'2025-08-22 09:53:38',	NULL),
+(2,	'abhi',	'$2y$10$AykmPZ57pH9z4KW8oCQ0huevn7NiJU59/aLzZu3CqBv.JRsYe9.Ly',	'2025-08-22 09:57:35',	NULL);
+
+CREATE TABLE `category` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order` int DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `category` (`id`, `category_name`, `image`, `order`, `status`, `created_at`, `updated_at`) VALUES
+(32,	'Animal Dosing',	'f3f5d77d47e52cdaeaada9489158132d.png',	0,	'Active',	'2025-08-28 17:27:48',	'2025-09-19 07:32:20'),
+(33,	'Cattle',	'e0f4f40ad860f15ab7e2c1eb9963e034.png',	0,	'Active',	'2025-08-28 17:28:26',	'2025-09-19 07:33:02'),
+(35,	'Sheep',	'b23fa21d34e3917c0d2091d9c3cb06ea.png',	0,	'Active',	'2025-08-28 17:29:12',	'2025-09-19 07:33:19'),
+(36,	'Horses',	'56c76aed8cd2dcf0d3376bee0db68699.png',	0,	'Active',	'2025-08-28 17:29:34',	'2025-09-19 07:33:36'),
+(40,	'Fencing',	'f2f8fe0aaf565df6076a5ac5d95e8231.png',	0,	'Active',	'2025-08-29 12:03:42',	'2025-09-19 07:33:57'),
+(41,	'Hardware',	'891452127fc4583cd1a0d97c02b147f2.png',	0,	'Active',	'2025-08-29 12:03:58',	'2025-09-19 07:34:55'),
+(42,	'Clothing & Footwear',	'2bc53aa0406e69febd9d03851fcecba5.png',	0,	'Active',	'2025-08-29 12:04:28',	'2025-09-19 07:44:32'),
+(44,	'Anand',	'a7ebfd03d240f36714552022da7b5f37.png',	0,	'Active',	'2025-09-02 17:22:55',	'2025-09-20 06:47:20');
+
+CREATE TABLE `customer` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `firstname` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telephone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fax` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `newsletter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `privacypolicy` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'In Active',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `customer` (`id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `password`, `newsletter`, `privacypolicy`, `deleted`, `status`) VALUES
+(12,	'Clarke',	'Bradford',	'abhinandansarkar00@gmail.com',	'+1 (589) 934-4727',	'+1 (981) 383-7159',	'$2y$10$VBMSE1XWJCN5XEAKBsWIye.1du.Et4Ta2gUp2NRJyNZ8wqvw24jxm',	'Allow',	'Agree',	'',	'Active'),
+(13,	'Amber',	'Cleveland',	'wehaciq@mailinator.com',	'+1 (313) 698-4757',	'+1 (882) 717-7483',	'$2y$10$lETvlqrwVMQpLfewrWimhujIGjHbVuga32Kccy3VWppzQxMryTn36',	'Allow',	'Agree',	'',	'Active'),
+(14,	'Ocean',	'Mclaughlin',	'hopupunyq@mailinator.com',	'+1 (839) 168-8571',	'+1 (365) 868-5976',	'$2y$10$Nx1klKZLV5sElEPZhd0XkeqG9YT2sHYmYhpidpWJVUCCupOaBzWJ2',	'Allow',	'Agree',	'',	'Active'),
+(15,	'Anand',	'Baid',	'anand@webgrity.com',	'9830098300',	'',	'$2y$10$9jqZtUg4O1QgJg.m9luwfO.mXc5CF3eXbrdCJFuQHbaqwTD5N0hju',	'Not Allow',	'Agree',	'',	'Active'),
+(16,	'Amela',	'Blanchard',	'wakufupat@mailinator.com',	'+1 (939) 418-1301',	'+1 (588) 766-4526',	'$2y$10$71KjkgvuRtTvvQ3aD4FfBeShaae6uKxbfihjnruR0mIIk/xYwdrDu',	'Allow',	'Agree',	'',	'Active'),
+(17,	'Joel',	'Strickland',	'jitywux@mailinator.com',	'+1 (387) 947-2932',	'+1 (155) 719-2879',	'$2y$10$O61iRhMDMgNefYnqU.dlyO9T/T.zeucDHfU1SnrjSpmofbfsIi05e',	'Allow',	'Agree',	'',	'Active'),
+(18,	'Paula',	'Finley',	'zakucabu@mailinator.com',	'+1 (276) 499-1875',	'+1 (478) 116-3861',	'$2y$10$83MXt55mc5xFFGnwhPS/yuQi5qMqvOoZ09HrmxTDO/XNETewg9rqG',	'Not Allow',	'Agree',	'',	'Active');
+
+CREATE TABLE `discount` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `valid_form` date NOT NULL,
+  `valid_till` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `update_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `discount` (`id`, `name`, `valid_form`, `valid_till`, `amount`, `type`, `status`, `deleted`, `created_at`, `update_at`) VALUES
+(4,	'Melvin Craft',	'2012-06-05',	'0000-00-00',	77.00,	'Dolar',	'Active',	'',	'2025-09-03',	'2025-09-03'),
+(5,	'Sarkar',	'2025-09-03',	'2026-09-30',	25.00,	'Percentage',	'Active',	'',	'2025-09-03',	'2025-09-09'),
+(6,	'Victor Bell',	'1978-11-30',	'2002-11-15',	26.00,	'Dolar',	'Inactive',	'No',	'2025-09-18',	'0000-00-00');
+
+CREATE TABLE `images` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `image_src` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `images_ibfk_4` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `images` (`id`, `image_src`, `product_id`) VALUES
+(178,	'img_68b1862a89966.jpg',	NULL),
+(179,	'img_68b1862e0c3bc.jpg',	NULL),
+(180,	'img_68b1871583cf7.jpg',	105),
+(181,	'img_68b1871a45ca9.jpg',	105),
+(182,	'img_68b1888f86d15.jpg',	106),
+(183,	'img_68b18892a0528.jpg',	106),
+(184,	'img_68b188db34266.jpg',	107),
+(185,	'img_68b188de3bae1.jpg',	107),
+(186,	'img_68b18923803fe.jpg',	108),
+(187,	'img_68b189280a328.jpg',	108),
+(188,	'img_68b1892af3a67.jpg',	108),
+(189,	'img_68b1899d0865c.jpg',	NULL),
+(190,	'img_68b189a129bef.jpg',	NULL),
+(191,	'img_68b189f36edbc.jpg',	NULL),
+(192,	'img_68b189f449885.jpg',	NULL),
+(193,	'img_68b18a39a057e.jpg',	NULL),
+(194,	'img_68b18a3ddf1fb.jpg',	NULL),
+(201,	'img_68b18bb5d5278.jpg',	NULL),
+(202,	'img_68b18bbc49c42.jpg',	NULL),
+(203,	'img_68b6db1ae59b9.jpg',	NULL),
+(213,	'img_68b6df8f675b0.jpg',	NULL),
+(214,	'img_68b6e0a0b7468.jpg',	NULL),
+(216,	'img_68b6e17b71424.jpg',	117),
+(217,	'img_68b6e17e11fd1.jpg',	117),
+(218,	'img_68b6e1833447f.jpg',	117),
+(219,	'img_68b6e2073a0b0.jpg',	118),
+(222,	'img_68b6e209000c8.jpg',	118),
+(257,	'img_68b6f070e8dac.jpg',	119),
+(267,	'img_68b6f2bc9a990.jpg',	121),
+(278,	'img_68b7d1e5a6e32.jpg',	121),
+(279,	'img_68b7d265d6e68.jpg',	122),
+(281,	'img_68b7d2677652a.jpg',	122),
+(282,	'img_68b7d281abd96.jpg',	122),
+(283,	'img_68b7d286e8b96.jpg',	122),
+(284,	'img_68b7d9aab4e11.jpg',	119),
+(285,	'img_68b7d9ab995a5.jpg',	119),
+(286,	'img_68b7d9ac883b0.jpg',	119),
+(289,	'5464298c36beeb7066c9eb0600ae4610.jpg',	123),
+(290,	'6cdb370fc5345cabe398565d413ab591.jpg',	124);
+
+CREATE TABLE `order` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `orderdate` date NOT NULL,
+  `customer_id` int unsigned NOT NULL,
+  `billingaddress_id` int unsigned NOT NULL,
+  `shippingaddress_id` int unsigned NOT NULL,
+  `subtotal` decimal(10,2) unsigned NOT NULL,
+  `ecotax` decimal(10,2) unsigned NOT NULL,
+  `discount` decimal(10,2) unsigned NOT NULL,
+  `vat` decimal(10,2) unsigned NOT NULL,
+  `total` decimal(10,2) unsigned NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `paymentmood` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `order` (`id`, `orderdate`, `customer_id`, `billingaddress_id`, `shippingaddress_id`, `subtotal`, `ecotax`, `discount`, `vat`, `total`, `status`, `paymentmood`, `deleted`) VALUES
+(41,	'2025-09-09',	12,	9,	11,	69.50,	2.00,	30.50,	13.90,	85.40,	'Cancel',	'Cash on Delivery',	''),
+(42,	'2025-09-09',	12,	9,	11,	159.50,	6.00,	70.50,	31.90,	197.40,	'Cancel',	'Cash on Delivery',	''),
+(43,	'2025-09-10',	12,	9,	9,	139.00,	4.00,	61.00,	27.80,	170.80,	'Cancel',	'Cash on Delivery',	'');
+
+CREATE TABLE `order_details` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int unsigned NOT NULL,
+  `product_id` int unsigned NOT NULL,
+  `quantity` int NOT NULL,
+  `deleted` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `deleted`) VALUES
+(42,	41,	117,	1,	'No'),
+(43,	42,	118,	1,	'No'),
+(44,	42,	119,	1,	'No'),
+(45,	42,	122,	1,	'No'),
+(46,	43,	117,	1,	'No'),
+(47,	43,	118,	1,	'No');
+
+CREATE TABLE `product` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` int unsigned NOT NULL,
+  `sub_category_id` int unsigned DEFAULT NULL,
+  `availability` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `featured_image` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `special_product` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `featured_product` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  KEY `product_ibfk_2` (`sub_category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `product` (`id`, `name`, `price`, `description`, `category_id`, `sub_category_id`, `availability`, `featured_image`, `special_product`, `featured_product`, `deleted`, `created_at`, `updated_at`) VALUES
+(105,	'Nevada Rocha',	432,	'In blanditiis libero',	32,	22,	'In Stock',	'featured_68b1870ef0371.jpg',	'yes',	'yes',	'',	'2025-08-29 10:55:17',	'2025-09-10 11:16:41'),
+(106,	'Troy Rivas',	425,	'Possimus iste autem',	32,	24,	'In Stock',	'featured_68b188882b123.jpg',	'yes',	'no',	'',	'2025-08-29 11:01:35',	'0000-00-00 00:00:00'),
+(107,	'Anne Brock',	418,	'In blanditiis elit ',	32,	23,	'In Stock',	'featured_68b188d2bdeae.jpg',	'yes',	'yes',	'',	'2025-08-29 11:02:51',	'0000-00-00 00:00:00'),
+(108,	'Oleg Henry',	901,	'In praesentium eos ',	32,	22,	'In Stock',	'featured_68b1891d14a78.jpg',	'no',	'yes',	'',	'2025-08-29 11:04:03',	'0000-00-00 00:00:00'),
+(117,	'hdfghh',	100,	'ghjkghjkgh',	32,	22,	'In Stock',	'featured_68b6e1747a9f5.jpg',	'yes',	'yes',	'',	'2025-09-02 12:22:19',	'0000-00-00 00:00:00'),
+(118,	'Product Anand',	100,	'Testing',	44,	31,	'In Stock',	'featured_68b6e206739da.jpg',	'yes',	'no',	'',	'2025-09-02 12:24:39',	'0000-00-00 00:00:00'),
+(119,	'Anand 2',	10,	'test',	44,	31,	'In Stock',	'1.jpg',	'yes',	'yes',	'',	'2025-09-02 12:28:38',	'2025-09-10 11:16:37'),
+(121,	'sarkar product',	100000,	'',	32,	31,	'In Stock',	'irina-iriser-mNz9Pa3tz34-unsplash.jpg',	'yes',	'no',	'',	'2025-09-02 13:32:24',	'2025-09-20 12:35:43'),
+(122,	'my cow',	120,	'lorem ipsum',	32,	22,	'In Stock',	'featured_68b7d25e92281.jpg',	'yes',	'yes',	'',	'2025-09-03 05:30:13',	'2025-09-10 11:16:50'),
+(123,	'Lila Wyatt',	400,	'Sed qui voluptas qui',	32,	23,	'In Stock',	'066524f031937807121ec2d7dd909d9e.jpg',	'yes',	'no',	'Yes',	'2025-09-20 04:57:06',	'2025-09-20 11:39:40'),
+(124,	'Heather Macias',	30,	'Earum saepe est dese',	32,	NULL,	'In Stock',	'40bf847d8302dfbc54f4c5ebaeea85d6.jpg',	'yes',	'no',	'Yes',	'2025-09-20 12:08:30',	'2025-09-20 12:32:07');
+
+CREATE TABLE `sub_category` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` int unsigned DEFAULT NULL,
+  `order` int NOT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `sub_category` (`id`, `name`, `category_id`, `order`, `status`, `created_at`, `updated_at`) VALUES
+(22,	'Cow',	32,	0,	'Active',	'2025-09-19 15:23:33',	'2025-09-19 15:23:33'),
+(23,	'Dog',	32,	0,	' Active',	'2025-08-28 17:30:41',	'0000-00-00 00:00:00'),
+(24,	'Cat',	32,	0,	' Active',	'2025-08-28 17:30:47',	'0000-00-00 00:00:00'),
+(31,	'Sub Anand',	44,	0,	' Active',	'2025-09-02 17:23:13',	'0000-00-00 00:00:00'),
+(34,	'Kylee Alford',	42,	431,	'Active',	'2025-09-18 16:44:39',	'0000-00-00 00:00:00'),
+(44,	'Tanek Guthrie',	40,	643,	'Active',	'2025-09-20 12:17:31',	'2025-09-20 12:17:31');
+
+-- 2025-09-20 09:30:08

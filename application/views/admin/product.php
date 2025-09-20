@@ -1,10 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if (isset($flash)): ?>
+<?php $flash = $this->session->flashdata('flash'); ?>
+<?php if (!empty($flash)): ?>
 <script>
 var flashType = "<?= $flash['type'] ?>";
 var flashMessage = "<?= $flash['message'] ?>";
 </script>
 <?php endif; ?>
+
 
 <main class="app-main" id="main" tabindex="-1">
     <div class="app-content-header">
@@ -94,7 +96,10 @@ $(function() {
     });
 
     if (typeof flashType !== 'undefined' && typeof flashMessage !== 'undefined') {
-        Toast.fire({ icon: flashType, title: flashMessage });
+        Toast.fire({
+            icon: flashType,
+            title: flashMessage,
+        });
     }
 });
 </script>
@@ -104,7 +109,7 @@ $(function() {
     padding: 6px !important;
     padding-left: 18px !important;
 }
-.swal2-toast h2.swal2-title {
+.swal2-toast h2:where(.swal2-title) {
     margin: 10px !important;
     padding: 0;
     font-size: 13px !important;

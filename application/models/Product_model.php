@@ -136,10 +136,6 @@ class Product_model extends CI_Model
         ]);
     }
 
-
-
-
-
     public function get_product_details($id)
     {
         $this->db->select('p.id, p.name AS product_name, p.price, p.description, c.category_name, sc.name AS sub_category_name, p.availability, p.featured_image, p.featured_product, p.special_product, c.id as category_id');
@@ -177,5 +173,84 @@ class Product_model extends CI_Model
         $this->db->from('images');
         $this->db->where('product_id', $product_id);
         return $this->db->get()->result_array();
+    }
+
+    public function update_product($id, $data)
+    {
+        // Validate ID
+        if (!is_numeric($id) || $id <= 0) {
+            log_message('error', "Invalid product ID: {$id}");
+            return false;
+        }
+
+        // Update the product record
+        $this->db->where('id', $id);
+        $result = $this->db->update('product', $data);
+
+        // Log result
+        if ($result) {
+            log_message('debug', "Product ID {$id} updated successfully.");
+        } else {
+            log_message('error', "Failed to update product ID {$id}. DB Error: " . $this->db->_error_message());
+        }
+
+        return $result;
+    }
+    public function get_gallery_images_by_ids($ids = [])
+    {
+        if (empty($ids) || !is_array($ids)) {
+            log_message('error', 'Invalid or empty image ID array passed to get_gallery_images_by_ids.');
+            return [];
+        }
+
+        $this->db->select('id, image_src');
+        $this->db->from('images');
+        $this->db->where_in('id', $ids);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            log_message('debug', 'Fetched gallery images for IDs: ' . implode(',', $ids));
+            return $query->result_array();
+        } else {
+            log_message('debug', 'No gallery images found for IDs: ' . implode(',', $ids));
+            return [];
+        }
+    }
+    public function delete_gallery_images($ids = [])
+    {
+        if (empty($ids) || !is_array($ids)) {
+            log_message('error', 'Invalid or empty image ID array passed to delete_gallery_images.');
+            return false;
+        }
+
+        $this->db->where_in('id', $ids);
+        $result = $this->db->delete('images');
+
+        if ($result) {
+            log_message('debug', 'Deleted gallery images for IDs: ' . implode(',', $ids));
+        } else {
+            log_message('error', 'Failed to delete gallery images. DB Error: ' . $this->db->_error_message());
+        }
+
+        return $result;
+    }
+
+    public function soft_delete_product($id)
+    {
+        if (!is_numeric($id) || $id <= 0) {
+            log_message('error', "Invalid product ID passed to soft_delete_product: {$id}");
+            return false;
+        }
+
+        $this->db->where('id', $id);
+        $result = $this->db->update('product', ['deleted' => 'Yes']);
+
+        if ($result) {
+            log_message('debug', "Product ID {$id} marked as deleted.");
+        } else {
+            log_message('error', "Failed to soft delete product ID {$id}. DB Error: " . $this->db->_error_message());
+        }
+
+        return $result;
     }
 }

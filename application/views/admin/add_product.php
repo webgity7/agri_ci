@@ -240,7 +240,6 @@
         galleryImage.files = dt.files;
     };
 
-
     const render = () => {
         preview.innerHTML = "";
 
@@ -454,7 +453,6 @@ document.getElementById('image_form').addEventListener('submit', e => {
     e.preventDefault();
     Swal.fire({
       icon: 'error',
-      title: 'Validation Error',
       html: `Please fill the following fields:<br><strong>${missingFields.join(', ')}</strong>`,
       showConfirmButton: true,
       timer: 5000,

@@ -33,11 +33,10 @@ class Admin extends CI_Controller
 			redirect(base_url('admin/index'));
 		}
 		$this->load->model('Admin_model');
-		// $username = $this->session->userdata('auth_user')['user_name'];
-		//$admin = $this->Admin_model->get_admin_by_username($username);
+		$data['username'] = $this->session->userdata('auth_user')['name'];
+		$data['password'] = $this->session->userdata('auth_user')['password'];
 
 		$data['pageTitle'] = 'Settings';
-		// $data['admin'] = $admin;
 
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/settings', $data);

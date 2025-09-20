@@ -76,13 +76,18 @@ $route['admin/product/add'] = 'adminproduct/add_product';
 $route['admin/product/submit'] = 'adminproduct/submit_product';
 $route['admin/product/edit/(:num)'] = 'adminproduct/edit_product/$1';
 $route['admin/product/update'] = 'adminproduct/update_product';
-$route['admin/product/delete/(:num)'] = 'adminproduct/delete_product';
+$route['admin/product/delete/(:num)'] = 'adminproduct/delete_product/$1';
 $route['admin/product/subcategory_for_product/(:num)'] = 'adminproduct/subcategory_for_product/$1';
 
 
 
 // for admin/order 
 $route['admin/order'] = 'adminorder/index';
+$route['admin/order/edit/(:num)'] = 'adminorder/edit_order/$1';
+$route['admin/order/cancel/(:num)'] = 'adminorder/cancel_order/$1';
+$route['admin/order/delete/(:num)'] = 'adminorder/delete_order/$1';
+$route['admin/order/upadete/(:num)'] = 'adminorder/update_order/$1';
+
 
 // for admin/customer
 $route['admin/customer'] = 'admincustomer/index';
